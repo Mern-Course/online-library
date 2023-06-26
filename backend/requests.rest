@@ -1,0 +1,101 @@
+GET http://localhost:5000 HTTP/1.1
+
+###
+
+GET http://localhost:5000/api/v1/users/ HTTP/1.1
+
+###
+
+POST http://localhost:5000/api/v1/users/register HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Arnab Banik",
+    "email": "arnabbanik9@gmail.com",
+    "password": "thisisatestingpassword",
+    "confirmPassword":"thisisatestingpassword",
+    "role":"owner"
+}
+
+###
+
+POST http://localhost:5000/api/v1/users/register HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Roshni Raha",
+    "email": "roshniraha17@gmail.com",
+    "password": "thisismypassword",
+    "confirmPassword":"thisismypassword",
+    "role":"admin"
+}
+
+###
+
+POST http://localhost:5000/api/v1/users/register HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Rumpletilskin",
+    "email": "rumpletilskin@gmail.com",
+    "password": "thisisrupletilskin",
+    "confirmPassword":"thisisrupletilskin"
+}
+
+###
+
+POST http://localhost:5000/api/v1/users/register HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Peter Pan",
+    "email": "peterpan@gmail.com",
+    "password": "thisispeterpan",
+    "confirmPassword":"thisispeterpan"
+}
+
+###
+
+POST http://localhost:5000/api/v1/users/register HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Robin Hood",
+    "email": "robinhood@gmail.com",
+    "password": "thisisrobinhood",
+    "confirmPassword":"thisisrobinhood"
+}
+
+###
+
+POST http://localhost:5000/api/v1/users/register HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Pinnochio",
+    "email": "pinnochio@gmail.com",
+    "password": "thisispinnochio",
+    "confirmPassword":"thisispinnochio"
+}
+
+###
+
+POST http://localhost:5000/api/v1/users/register HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Batman",
+    "email": "batman@gmail.com",
+    "password": "thisisbatman",
+    "confirmPassword":"thisisbatman"
+}
+
+###
+
+POST http://localhost:5000/api/v1/users/login HTTP/1.1
+content-type: application/json
+
+{
+    "email": "pinnochio@gmail.com",
+    "password": "thisispinnochio"
+}
