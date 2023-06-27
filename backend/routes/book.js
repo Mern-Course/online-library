@@ -1,35 +1,24 @@
-// const express = require('express');
-// const {
-//   getUsers,
-//   updateMe,
-//   deleteMe,
-//   getMe,
-//   getUser,
-//   uploadUserPhoto,
-//   resizePhoto,
-// } = require('../controllers/user');
+const express = require('express');
+const {
+  getBooks,
+  createBook,
+  getBook,
+  updateBook,
+  deleteBook,
+} = require('../controllers/book');
 
-// require('../controllers/googleAuth');
+const router = express.Router();
 
-// const router = express.Router();
+router
+  .route('/')
+  .get(getBooks)
+  .post(createBook);
 
-// router.route('/register').post(register);
-// router.route('/login').post(login);
-// router.route('/logout').get(logout);
+router
+  .route('/:id')
+  .get(getBook)
+  .patch(updateBook)
+  .delete(deleteBook);
 
-// router.route('/forgotPassword').post(forgotPassword);
-// router.route('/resetPassword/:token').patch(resetPassword);
+module.exports = router;
 
-// router.use(protect);
-
-// router.route('/updatePassword').patch(updatePassword);
-// router.route('/me').get(getMe, getUser);
-// router.route('/updateMe').patch(uploadUserPhoto, resizePhoto, updateMe);
-// router.route('/deleteMe').delete(deleteMe);
-
-// router.use(restrictTo('employee', 'admin'));
-
-// router.route('/').get(getUsers);
-// router.route('/:id').get(getUser);
-
-// module.exports = router;
