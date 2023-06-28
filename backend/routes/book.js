@@ -7,18 +7,24 @@ const {
   deleteBook,
 } = require('../controllers/book');
 
+const {protect, restrictTo} = require('../controllers/auth')
+
 const router = express.Router();
 
 router
   .route('/')
   .get(getBooks)
-  .post(createBook);
+
+
 
 router
   .route('/:id')
   .get(getBook)
-  .patch(updateBook)
-  .delete(deleteBook);
+
+router.use(protect())
+router.use(restrictTo("admin"))
+router.route("/").post(createBook);
+router.route("/:id").delete(deleteBook).patch(updateBook)
 
 module.exports = router;
 
