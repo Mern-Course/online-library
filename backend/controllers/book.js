@@ -1,58 +1,41 @@
-const AppError = require('../utils/AppError');
+const mongoose = require('mongoose');
 const catchAsync = require('../utils/catchAsync');
+const Book = require('../models/book');
+const AppError = require('../utils/AppError');
 
-exports.deleteOne = (Model) =>
-  catchAsync(async (req, res, next) => {
-    const doc = await Model.findByIdAndDelete(req.params.id);
-    if (!doc) return next(new AppError('No document with that ID exists', 404));
+const getBooks = catchAsync(async (req, res) => {
+  const books = await Book.find();
+  res.json(books);
+});
 
-    res.status(204).json({
-      status: 'success',
-      data: null,
-    });
+const createBook = catchAsync(async (req, res) => {
+  const book = new Book(req.body);
+  const newBook = await book.save();
+  res.status(201).json(newBook);
+});
+
+const getBook = catchAsync(async (req, res) => {
+  res.json(res.book);
+});
+
+const updateBook = catchAsync(async (req, res) => {
+  const updates = req.body;
+  const updatedBook = await Book.findByIdAndUpdate(req.params.id, updates, {
+    new: true,
+    runValidators: true,
   });
+  res.json(updatedBook);
+});
 
-exports.updateOne = (Model) =>
-  catchAsync(async (req, res, next) => {
-    const doc = await Model.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-    });
-    if (!doc) return next(new AppError('No document with that ID', 404));
+const deleteBook = catchAsync(async (req, res) => {
+  await res.book.remove();
+  res.json({ message: 'Book deleted' });
+});
 
-    res.status(200).json({
-      status: 'success',
-      data: doc,
-    });
-  });
-
-exports.getOne = (Model) =>
-  catchAsync(async (req, res, next) => {
-    const doc = await Model.findById(req.params.id);
-    if (!doc) return next(new AppError('No document with that ID', 404));
-
-    res.status(200).json({
-      status: 'success',
-      data: doc,
-    });
-  });
-
-exports.getAll = (Model) =>
-  catchAsync(async (req, res, next) => {
-    const docs = await Model.find({});
-    res.status(200).json({
-      status: 'success',
-      data: { docs },
-      count: docs.length,
-    });
-  });
-
-exports.addOne = (Model) =>
-  catchAsync(async (req, res, next) => {
-    const doc = await Model.create(req.body);
-
-    res.status(200).json({
-      status: 'success',
-      data: doc,
-    });
-  });
+module.exports = {
+  getBooks,
+  createBook,
+  getBook,
+  updateBook,
+  deleteBook,
+};
