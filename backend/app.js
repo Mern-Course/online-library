@@ -10,6 +10,7 @@ const AppError = require('./utils/AppError');
 const globalErrorHandler = require('./controllers/error');
 
 const user = require('./routes/user');
+const book = require('./routes/book');
 
 const app = express();
 
@@ -56,6 +57,8 @@ app.get('/', (req, res) => {
 // ROUTES
 // 1. User routes
 app.use('/api/v1/users', user);
+// 2. Book routes
+app.use('/api/v1/books', book);
 
 // 2. Unhandled routes
 app.all('*', (req, res, next) => {

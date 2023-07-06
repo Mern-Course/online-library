@@ -1,36 +1,40 @@
-const mongoose = require('mongoose');
 const catchAsync = require('../utils/catchAsync');
 const Book = require('../models/book');
 const AppError = require('../utils/AppError');
+const { getOne, addOne, getAll, updateOne, deleteOne } = require('./factory');
 
-const getBooks = catchAsync(async (req, res) => {
-  const books = await Book.find();
-  res.json(books);
-});
+const getBooks = getAll(Book);
+const createBook = addOne(Book);
+const getBook = getOne(Book);
+const updateBook = updateOne(Book);
+const deleteBook = deleteOne(Book);
 
-const createBook = catchAsync(async (req, res) => {
-  const book = new Book(req.body);
-  const newBook = await book.save();
-  res.status(201).json(newBook);
-});
+const issueBook = catchAsync(async (req, res, next) => {
+  const book = await Book.findById(req.params.id);
+  if(!book)
+    return next(new AppError("No such book exists"));
 
-const getBook = catchAsync(async (req, res) => {
-  res.json(res.book);
-});
+  if(book.available === false)
+    return next(new AppError("Book isn't available at the moment"));
 
-const updateBook = catchAsync(async (req, res) => {
-  const updates = req.body;
-  const updatedBook = await Book.findByIdAndUpdate(req.params.id, updates, {
-    new: true,
-    runValidators: true,
+  let updatedBook = {...book};
+  updatedBook = {
+    available: false,
+    issuedBy: req.user.id,
+    issuedOn: new Date(),
+  }
+  updatedBook.save();
+
+  res.status(200).json({
+    status: 'success',
+    data: updatedBook,
   });
-  res.json(updatedBook);
-});
+})
 
-const deleteBook = catchAsync(async (req, res) => {
-  await res.book.remove();
-  res.json({ message: 'Book deleted' });
-});
+
+const returnBook = catchAsync(async(req, res, next) => {
+  
+})
 
 module.exports = {
   getBooks,
@@ -38,4 +42,6 @@ module.exports = {
   getBook,
   updateBook,
   deleteBook,
+  issueBook,
+  returnBook
 };

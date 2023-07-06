@@ -50,7 +50,16 @@ const schema = new mongoose.Schema({
 		type: 'String',
 		default: 'default.png',
 	},
-	passwordChangedAt: Date,
+  booksIssued: [{
+    type: mongoose.Schema.ObjectId,
+    ref: 'book',
+  }],
+  fine: {
+    type: Number,
+    min: 0,
+    default: 0,
+  },
+  passwordChangedAt: Date,
 	passwordResetToken: String,
 	resetTokenExpiresIn: Date,
 });

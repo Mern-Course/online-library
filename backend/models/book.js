@@ -35,6 +35,10 @@ const schema = new mongoose.Schema({
 		type: Boolean,
 		default: true,
 	},
+  issuedBy: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'user',
+  },
 	issuedOn: Date,
 	returnDate: Date,
 },
