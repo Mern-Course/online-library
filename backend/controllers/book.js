@@ -51,7 +51,7 @@ const returnBook = catchAsync(async (req, res, next) => {
     available: true,
     issuedBy: null,
     issuedOn: null,
-  }, { new: true });
+  }, { new: true, runValidators: true });
 
   res.status(200).json({
     status: 'success',
