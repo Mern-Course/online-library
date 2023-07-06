@@ -1,0 +1,60 @@
+.sidenavbox{
+    margin-top: 62px;
+    
+    width: 250px;
+    height: 91.4vh;
+    background-color: #5f7b88;
+}
+
+.content{
+
+    height: 91.4vh;
+    width: 1285.9999px;
+    position: absolute;
+    left: 249.5px;
+    top: 61px;
+    background-color: whitesmoke;
+    
+}
+
+.contentheading{
+    text-align: center;
+    margin-top: 40px;
+    
+    text-decoration: underline;
+    font-family: 'Carter One', cursive;
+}
+
+
+.linkitem{
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+    
+    font-family : 'Ysabeau SC', sans-serif
+}
+
+.linkbox{
+    width: 100%;
+    margin-top: 20px;
+    text-align: center;
+
+}
+
+.label{
+    margin-left: 50px;
+    margin-top: 40px;
+    width: 125px;
+    font-size: 30px;
+    font-family: 'Wix Madefor Display', sans-serif;
+}
+
+.labelcontent{
+    margin-left: 50px;
+    margin-top: 53px;
+    font-size: 15px;
+    font-weight: bold;
+    
+
+}
