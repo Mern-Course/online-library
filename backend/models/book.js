@@ -35,12 +35,22 @@ const schema = new mongoose.Schema({
 		type: Boolean,
 		default: true,
 	},
-  issuedBy: {
-    type: mongoose.Schema.ObjectId,
-    ref: 'user',
-  },
-	issuedOn: Date,
-	returnDate: Date,
+	issuedBy: {
+	    type: mongoose.Schema.ObjectId,
+	    ref: 'user',
+	},
+	issuedOn: {
+	    type: Date,
+	    default: null,
+	},
+	returnDate: {
+	    type: Date,
+	    default: null,
+	},
+	fine: {
+	    type: Number,
+	    default: 0,
+	},
 },
 {
 	toJSON: { virtuals: true },
@@ -50,5 +60,5 @@ const schema = new mongoose.Schema({
 
 schema.virtual('expectedReturnDate').get(function() {
 	const two_weeks_ms = 1000*60*60*24*14;
-	return this.issuedOn + two_weeks_ms;
+	return this.issuedOn ? this.issuedOn.getTime() + two_weeks_ms : null;
 });
