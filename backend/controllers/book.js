@@ -17,13 +17,13 @@ const issueBook = catchAsync(async (req, res, next) => {
   if(book.available === false)
     return next(new AppError("Book isn't available at the moment"));
 
-  let updatedBook = {...book};
-  updatedBook = {
+  let updatedBook = {
     available: false,
     issuedBy: req.user.id,
     issuedOn: new Date(),
   }
-  updatedBook.save();
+  
+  await Book.findByIdAndUpdate(book.id, updatedBook);
 
   res.status(200).json({
     status: 'success',
@@ -51,13 +51,14 @@ const returnBook = catchAsync(async (req, res, next) => {
     available: true,
     issuedBy: null,
     issuedOn: null,
+    returnDate,
   }, { new: true, runValidators: true });
 
   res.status(200).json({
     status: 'success',
     data: {
       book: updatedBook,
-      fine: fine,
+      fine, 
     },
   });
 })

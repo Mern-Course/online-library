@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require("express");
 const {
   getBooks,
   createBook,
@@ -7,24 +7,23 @@ const {
   deleteBook,
   issueBook,
   returnBook,
-} = require('../controllers/book');
+} = require("../controllers/book");
 
-const {protect, restrictTo} = require('../controllers/auth')
+const { protect, restrictTo } = require("../controllers/auth");
 
 const router = express.Router();
 
-router.route('/').get(getBooks)
-router.route('/:id').get(getBook)
+router.route("/").get(getBooks);
+router.route("/:id").get(getBook);
 
-router.use(protect)
+router.use(protect);
 
-router.route("/issue").get(issueBook)
-router.route("/return").get(returnBook)
+router.route("/issue/:id").get(issueBook);
+router.route("/return/:id").get(returnBook);
 
-router.use(restrictTo("admin"))
+router.use(restrictTo("admin"));
 
 router.route("/").post(createBook);
-router.route("/:id").delete(deleteBook).patch(updateBook)
+router.route("/:id").delete(deleteBook).patch(updateBook);
 
 module.exports = router;
-
