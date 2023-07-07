@@ -1,7 +1,5 @@
 # Library API
 
----
-
 This is a backend API for an online library management platform. The API
 provides features to manage users and books. Users can register themselves into
 the library system, view books, issue books for themselves, and return books.
@@ -9,7 +7,6 @@ All the basic functionalities of a library system have been provided.
 
 ## Routes
 
----
 
 ### User
 
