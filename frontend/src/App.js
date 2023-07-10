@@ -7,6 +7,8 @@ import Popular from './Pages/Popular';
 import Signuppage from './Pages/Signuppage';
 import Singlebookinfo from './Pages/Singlebookinfo';
 import Trending from './Pages/Trending';
+import Changepswd from './Pages/Changepswd';
+import Bookonhold from './Pages/Bookonhold';
 
 import {BrowserRouter as Router, Route, Routes, Link} from 'react-router-dom'
 import Header from './components/Header';
@@ -27,16 +29,19 @@ function App() {
            <Route path='/home/trending' element={<Trending/>} ></Route>
            <Route path='/home/popular' element={<Popular/>} ></Route>
            <Route path='/singlebookinfo' element={<Singlebookinfo/>} ></Route>
-             <Route path='/account' element={<Account/>} ></Route>
+           <Route path='/account' element={<Account/>} ></Route>
+           <Route path='/signup' element={<Signuppage/>} ></Route>
+           <Route path='/changepswd' element={<Changepswd/>} ></Route>
+           <Route path='/booksonhold' element={<Bookonhold/>} ></Route>
 
          </Routes>
        </main>
       
-     </Router>
+    </Router>
     
     // <div>
       
-    //   <Account></Account>
+    //   <Signuppage></Signuppage>
     // </div>
 
 

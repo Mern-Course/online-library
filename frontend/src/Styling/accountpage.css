@@ -56,5 +56,31 @@
     font-size: 15px;
     font-weight: bold;
     
+}
+
+.chagepswform{
+    
+    height: 655px;
+    width: 1400px;
+    padding: 12px 20px;
+    box-sizing: border-box;  
+    margin-top: 62px;
+    
+    
+}
+
+.changeinput{
+    width: 500px;
+    margin: 30px;
+    height: 40px;
+    outline: none;
+    border: none;
+    border-bottom:2px solid black ;
+}
+
+.changesubmitbtn{
+    margin: 30px;
+    height: 40px;
+    margin-left: 525px;
 
 }

@@ -90,14 +90,13 @@
 .signupformbox{
   background-color: whitesmoke;
   opacity: 0.85;
-
-  height: 400px;
+  height: 550px;
   width: 500px;
   padding: 12px 20px;
   box-sizing: border-box;  
   box-shadow: 0 20px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 10px;
-  margin-top: 150px;
+  margin-top: 125px;
   
 }
 .loginform-position {
