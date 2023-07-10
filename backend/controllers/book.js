@@ -10,6 +10,36 @@ const getBook = getOne(Book);
 const updateBook = updateOne(Book);
 const deleteBook = deleteOne(Book);
 
+const getPopular = catchAsync(async (req, res, next) => {
+  const books = await Book.find({});
+
+  const popular = [];
+  for (let i of books) {
+    if (i.rating > 4) popular.push(i);
+  }
+
+  res.status(200).json({
+    status: "success",
+    data: popular,
+  });
+});
+
+const getTrending = catchAsync(async (req, res, next) => {
+  const books = await Book.find({});
+
+  const popular = [];
+  for (let i of books) {
+    if (i.rating > 4 && new Date() - i.added < 1000 * 60 * 60 * 24 * 14) {
+      popular.push(i);
+    }
+  }
+
+  res.status(200).json({
+    status: "success",
+    data: popular,
+  });
+});
+
 const issueBook = catchAsync(async (req, res, next) => {
   const book = await Book.findById(req.params.id);
   if (!book) {
@@ -103,4 +133,6 @@ module.exports = {
   deleteBook,
   issueBook,
   returnBook,
+  getTrending,
+  getPopular,
 };

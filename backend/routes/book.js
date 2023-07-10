@@ -7,6 +7,8 @@ const {
   deleteBook,
   issueBook,
   returnBook,
+  getPopular,
+  getTrending,
 } = require("../controllers/book");
 
 const { protect, restrictTo } = require("../controllers/auth");
@@ -14,6 +16,8 @@ const { protect, restrictTo } = require("../controllers/auth");
 const router = express.Router();
 
 router.route("/").get(getBooks);
+router.route("/popular").get(getPopular);
+router.route("/trending").get(getTrending);
 router.route("/:id").get(getBook);
 
 router.use(protect);

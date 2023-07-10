@@ -49,6 +49,10 @@ const schema = new mongoose.Schema({
     type: Date,
     default: null,
   },
+  added: {
+    type: Date,
+    default: "01/01/2023",
+  },
 }, {
   toJSON: { virtuals: true },
   toObject: { virtuals: true },
