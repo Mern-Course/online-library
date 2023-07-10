@@ -29,7 +29,7 @@ const getTrending = catchAsync(async (req, res, next) => {
 
   const popular = [];
   for (let i of books) {
-    if (i.rating > 4 && new Date() - i.added < 1000 * 60 * 60 * 24 * 14) {
+    if (i.rating > 4 && new Date() - i.added < 1000 * 60 * 60 * 24 * 365) {
       popular.push(i);
     }
   }
