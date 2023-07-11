@@ -15,6 +15,19 @@ const schema = new mongoose.Schema({
     type: "String",
     required: [true, "Book must have an author"],
   },
+  publisher: {
+    type: "String",
+    required: [true, "Book must have a publisher"],
+  },
+  cost: {
+    type: "Number",
+    min: 0,
+    required: [true, "Book must have a cost"],
+    default: 0,
+  },
+  description: {
+    type: "String",
+  },
   genre: {
     type: [String],
     required: [true, "Book must have genres"],
