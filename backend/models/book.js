@@ -64,7 +64,7 @@ const schema = new mongoose.Schema({
   },
   added: {
     type: Date,
-    default: "01/01/2023",
+    default: new Date(),
   },
 }, {
   toJSON: { virtuals: true },

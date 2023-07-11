@@ -1,9 +1,9 @@
-const multer = require('multer');
-const sharp = require('sharp');
-const User = require('../models/user');
-const catchAsync = require('../utils/catchAsync');
-const AppError = require('../utils/AppError');
-const { deleteOne, updateOne, getOne, getAll } = require('./factory');
+const multer = require("multer");
+const sharp = require("sharp");
+const User = require("../models/user");
+const catchAsync = require("../utils/catchAsync");
+const AppError = require("../utils/AppError");
+const { deleteOne, updateOne, getOne, getAll } = require("./factory");
 
 const filterObj = (obj, ...fields) => {
   let fresh = {};
@@ -21,8 +21,8 @@ exports.getMe = (req, res, next) => {
 const multerStorage = multer.memoryStorage();
 
 const multerFilter = (req, file, cb) => {
-  if (file.mimetype.startsWith('image')) cb(null, true);
-  else cb(new AppError('Not an image.', 400), false);
+  if (file.mimetype.startsWith("image")) cb(null, true);
+  else cb(new AppError("Not an image.", 400), false);
 };
 
 const upload = multer({
@@ -30,35 +30,36 @@ const upload = multer({
   fileFilter: multerFilter,
 });
 
-exports.uploadUserPhoto = upload.single('photo');
+exports.uploadUserPhoto = upload.single("photo");
 
 exports.resizePhoto = (req, res, next) => {
   if (!req.file) return next();
   req.file.filename = `user-${req.user.id}-${Date.now()}.jpeg`;
   sharp(req.file.buffer)
     .resize(500, 500)
-    .toFormat('jpeg')
+    .toFormat("jpeg")
     .jpeg({ quality: 90 })
     .toFile(`public/img/users/${req.file.filename}`);
   next();
 };
 
 exports.updateMe = catchAsync(async (req, res, next) => {
-  if (req.body.password || req.body.confirmPassword)
+  if (req.body.password || req.body.confirmPassword) {
     return next(
       new AppError(
-        'Please use the /updatePassword route to update your password.',
+        "Please use the /updatePassword route to update your password.",
         400,
       ),
     );
-  const updates = filterObj(req.body, 'name', 'email');
+  }
+  const updates = filterObj(req.body, "name", "email");
   if (req.file) updates.photo = req.file.filename;
   const user = await User.findByIdAndUpdate(req.user.id, updates, {
     new: true,
     runValidators: true,
   });
   res.status(200).json({
-    status: 'success',
+    status: "success",
     data: user,
   });
 });
@@ -67,7 +68,7 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
   await User.findByIdAndUpdate(req.user.id, { active: false });
 
   res.status(204).json({
-    status: 'success',
+    status: "success",
     data: null,
   });
 });
