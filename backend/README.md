@@ -60,3 +60,4 @@ All the basic functionalities of a library system have been provided.
 5. /api/v1/books/<book_id> (DELETE) - Delete book (For admins only)
 6. /api/v1/books/issue/<book_id> (GET) - Issue book
 7. /api/v1/books/return/<book_id> (GET) - Return book
+

@@ -3,7 +3,7 @@ import { Button } from "bootstrap";
 import { useState } from "react";
 import TextOverflow from 'react-text-overflow';
 
-function Smallcard()
+function Smallcard(props)
 {
 
     const [hovered, setHovered] = useState(false);
@@ -12,18 +12,22 @@ function Smallcard()
     var rating = "Rating : ";
     var genere = "Genere : ";
 
+    var link = "/singlebookinfo/" + `${props.id}`
+
     let v = "George R.R Martin "
+    let imagelink = `${props.image}`
     return (
         <div onMouseLeave={() => {setHovered(false)}} onMouseEnter={() => {setHovered(true); console.log(hovered)}} className="smallcard"  style={ hovered ? {"transform" : "scale(1.06)"} : {"transform" : "scale(1)"} } >
-            <img src="https://images.randomhouse.com/cover/9780553808049"
+            <img src={imagelink}
             style={{"height" : "300px", "border" : "1px solid black", "margin" : "10px"}} ></img>  
-            <h5>Title</h5>
+            <p style={{"fontWeight" : "bolder"}} >{props.title}</p>
 
-            <TextOverflow text={author + v}></TextOverflow> 
-            <TextOverflow text={genere + v}></TextOverflow> 
-            <TextOverflow text={rating + v}></TextOverflow> 
+            <TextOverflow text={author + props.author}></TextOverflow> 
+            <TextOverflow text={genere + props.genere}></TextOverflow> 
+            <TextOverflow text={rating + props.rating}></TextOverflow> 
         
-            <a href="/singlebookinfo" ><button className="smallcardview">View</button></a>
+            <a href= {link} ><button className="smallcardview">View</button></a>
+            
             
         </div>
     );

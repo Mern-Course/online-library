@@ -1,6 +1,7 @@
 
 import '../Styling/accountpage.css';
 import Header from '../components/Header';
+import axios from 'axios';
 
 import { useState } from 'react';
 
@@ -10,12 +11,35 @@ function Changepswd()
     const [changed, setChanged] = useState(false)
 
 
-    function display(event)
+    const [password, setPassword] = useState("")
+    const [newpassword, setNew] = useState("");
+    const [cnfmpswd, setCnfm] = useState("");
+
+
+
+    function updatepswd(event)
     {
-        setChanged(true);
+        setPassword(event.target.value);
+    }
+
+    function updatecnfm(event)
+    {
+        setCnfm(event.target.value);
+        setNew(event.target.value);
+    }
+
+
+    function update(event)
+    {
         event.preventDefault();
+        const user = { password: password, newPassword : newpassword, confirmNewPassword : cnfmpswd }
+
+        axios.patch("http://localhost:5000/api/v1/users/updatePassword", user, { withCredentials: true })
+      .then((res) => {console.log(res.data); setCnfm(""); setNew(""); setPassword(""); setChanged(true) })
+      .catch((err) => console.log(err));
     }
     
+
     return(
 
 
@@ -42,18 +66,17 @@ function Changepswd()
             </div>
 
             <div className='chagepswform' >
-                <form>
+                <form onSubmit={update}>
                     <h2>Change Password:</h2>
-                    <input className='changeinput'  type='password' placeholder='Current Password' ></input>
-                    <input className='changeinput' type='password' placeholder='New Password' ></input>
-                    <a><button className='changesubmitbtn' onClick={display} >Submit</button></a>
+                    <input onChange={updatepswd} value={password} className='changeinput'  type='password' placeholder='Current Password' ></input>
+                    <input onChange={updatecnfm} value={newpassword} className='changeinput' type='password' placeholder='New Password' ></input>
+
+                    <a><button className='changesubmitbtn' type='submit'>Submit</button></a>
 
                     {changed && <h5 style={{"margin-left" : "480px" , "margin-top" : "50px"}} >Password Changed</h5> }
                 </form>
             </div>
             
-            
-
         </div>
 
         

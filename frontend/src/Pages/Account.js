@@ -2,15 +2,20 @@ import Header from "../components/Header";
 import '../Styling/accountpage.css';
 import {React} from 'react';
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect , useState } from "react";
 
 function Account()
 {
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
+    const [id, setId] = useState("");
+    const[phone, setPhone] = useState("");
 
     useEffect(() => {
-        axios.get("http://localhost:5000/api/v1/users/me")
-             .then((res) => {console.log(res)})
-             .catch(err => {console.log(err)});
+        axios.get("http://localhost:5000/api/v1/users/me",{ withCredentials: true })
+                
+                .then((res) => { setEmail(res.data.data.email); setPhone(res.data.data.phone) ; setUsername(res.data.data.name); setId(res.data.data._id); console.log(res.data.data)})
+                .catch(err => console.log(err));
     }, )
     
     return(
@@ -45,19 +50,23 @@ function Account()
                 </div>
 
                 <div style={{"display" : "flex"}} >
-                    <label className="label" >Username:</label><p className="labelcontent" >ABCDEF</p>
+                    <label className="label" >Username:</label><p className="labelcontent" >{username}</p>
                 </div>
 
                 <div style={{"display" : "flex"}} >
-                    <label className="label" >Email-Id:</label><p className="labelcontent" >ABC@gmail.com </p>
+                    <label className="label" >Email-Id:</label><p className="labelcontent" >{email}</p>
                 </div>
 
                 <div style={{"display" : "flex"}} >
-                    <label className="label" >Ph.no:</label><p className="labelcontent" > 1234567890</p>
+                    <label className="label" >User Id:</label><p className="labelcontent" > {id}</p>
+                </div>
+
+                
+                <div style={{"display" : "flex"}} >
+                    <label className="label" >Ph.No:</label><p className="labelcontent" > {phone}</p>
                 </div>
 
             </div>
-
 
         </div>
     );

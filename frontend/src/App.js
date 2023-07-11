@@ -28,7 +28,7 @@ function App() {
            <Route path='/home' element={<Home/>} ></Route>
            <Route path='/home/trending' element={<Trending/>} ></Route>
            <Route path='/home/popular' element={<Popular/>} ></Route>
-           <Route path='/singlebookinfo' element={<Singlebookinfo/>} ></Route>
+           <Route path='/singlebookinfo/:id' element={<Singlebookinfo/>} ></Route>
            <Route path='/account' element={<Account/>} ></Route>
            <Route path='/signup' element={<Signuppage/>} ></Route>
            <Route path='/changepswd' element={<Changepswd/>} ></Route>

@@ -10,7 +10,7 @@ function Signuppage()
     const [password, setPassword] = useState("");
     const [cnfmpassword, setCnfmpassword] = useState("");
     const [name , setName] = useState("");
-    const [gender , setGender] = useState("");
+    const [phone , setPhone] = useState("");
     const [alertmsg, setAlert] = useState("");
 
 
@@ -31,16 +31,16 @@ function Signuppage()
     {
         setName(event.target.value);
     }
-    function updategender(event)
+    function updateph(event)
     {
-        setGender(event.target.value);
+        setPhone(event.target.value);
     }
 
 
     function postdata(event)
     {
         event.preventDefault();
-        const user = { name: name, email: email, password: password, confirmPassword: cnfmpassword, gender: gender };
+        const user = { name: name, email: email, password: password, confirmPassword: cnfmpassword, phone: phone };
         console.log(user)
 
         axios.post("http://localhost:5000/api/v1/users/register", user, { withCredentials: true })
@@ -49,7 +49,7 @@ function Signuppage()
         setEmail("")
         setName("")
         setPassword("")
-        setGender("")
+        setPhone("")
     }
 
     return(
@@ -70,7 +70,7 @@ function Signuppage()
 
                     <input value={cnfmpassword} onChange={updatecnfmpass} className="forminput" type="password" placeholder="CONFIRM PASSWORD" name="cnfmpassword" /><br></br>
 
-                    <input value={gender} onChange={updategender} className="forminput" type="text" placeholder="GENDER (M / F)" name="gender" /><br></br>
+                    <input value={phone} onChange={updateph} className="forminput" type="text" placeholder="Ph.No" name="phone" /><br></br>
                     
                     <a href="/" className="alreadsignedup">SIGNED UP ALREADY?</a>
 
