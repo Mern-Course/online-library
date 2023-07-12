@@ -6,7 +6,7 @@ function Smallcard(props) {
 
   var author = "Author : ";
   var rating = "Rating : ";
-  var genere = "Genere : ";
+  var genere = "Genre : ";
 
   var link = "/singlebookinfo/" + `${props.id}`;
 

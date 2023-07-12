@@ -74,6 +74,14 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
 });
 
 exports.getUsers = getAll(User);
-exports.getUser = getOne(User);
+exports.getUser = catchAsync(async (req, res, next) => {
+  let doc = await User.findById(req.params.id).populate("booksIssued");
+  if (!doc) return next(new AppError("No document with that ID", 404));
+
+  res.status(200).json({
+    status: "success",
+    data: doc,
+  });
+});
 exports.deleteUser = deleteOne(User);
 exports.updateUser = updateOne(User);

@@ -15,7 +15,7 @@ function Bookonhold() {
         let res = await axios.get("http://localhost:5000/api/v1/users/me", {
           withCredentials: true,
         });
-        setBooksid(res.data.data.booksIssued);
+        setBooks(res.data.data.booksIssued);
       } catch (err) {
         console.log(err);
       }
@@ -23,24 +23,6 @@ function Bookonhold() {
 
     fetcher();
   }, []);
-
-  useEffect(() => {
-    if (booksid) {
-      booksid.map((id) =>
-        axios.get(`http://localhost:5000/api/v1/books/${id}`, {
-          withCredentials: true,
-        }).then((res) => {
-          const book = res.data.data;
-          for (let i of books) {
-            temp.push(i);
-          }
-          temp.push(book);
-          console.log(temp);
-          setBooks(temp);
-        }).catch((err) => console.error(err))
-      );
-    }
-  }, [booksid]);
 
   return (
     <div>
@@ -63,12 +45,12 @@ function Bookonhold() {
         <div
           style={{
             marginLeft: "20rem",
-            marginTop: "-5rem",
+            marginTop: "-8rem",
             display: "grid",
             gridTemplateColumns: "1fr 1fr 1fr",
           }}
         >
-          {books.map((book) => (
+          {books && books.map((book) => (
             <Smallcard
               author={book.author}
               genere={book.genre}

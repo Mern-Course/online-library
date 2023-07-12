@@ -9,11 +9,8 @@ function Singlebookinfo() {
   const { id } = useParams();
 
   const [hover, setHover] = useState(false);
-
   const [book, setBook] = useState({});
-
   const [hold, setHold] = useState(false);
-
   const [data, setData] = useState("");
 
   useEffect(() => {
@@ -21,8 +18,9 @@ function Singlebookinfo() {
       withCredentials: true,
     })
       .then((res) => {
-        setBook(res.data.data);
-        console.log(res.data.data.available);
+        let temp = res.data.data;
+        temp.added = new Date(res.data.data.added);
+        setBook(temp);
 
         if (res.data.data.available == true) {
           setData("Book is available");
@@ -33,10 +31,6 @@ function Singlebookinfo() {
         }
       }).catch((err) => console.log(err));
   }, []);
-
-  useEffect(() => {
-    console.log("AFTER CLICK" + book.available);
-  }, [book]);
 
   let imagelink = `${book.photo}`;
 
@@ -65,7 +59,6 @@ function Singlebookinfo() {
       })
         .then((res) => {
           setHold(false);
-          console.log(res.data);
           setData("Book unplaced on hold");
           book.available = true;
         })
@@ -127,12 +120,20 @@ function Singlebookinfo() {
             </p>
           </div>
 
-          <div style={{ display: "flex" }}>
-            <label className="labelstyle">Release Date :</label>{" "}
-            <p>
-              <TextOverflow text={"13/09/1996 "}></TextOverflow>
-            </p>
-          </div>
+          {book.added &&
+            (
+              <div style={{ display: "flex" }}>
+                <label className="labelstyle">Release Date :</label>{" "}
+                <p>
+                  <TextOverflow
+                    text={`${book.added.getDate()}/${
+                      book.added.getMonth() + 1
+                    }/${book.added.getFullYear()}`}
+                  >
+                  </TextOverflow>
+                </p>
+              </div>
+            )}
 
           <div style={{ display: "flex" }}>
             <label className="labelstyle">Cost:</label>{" "}

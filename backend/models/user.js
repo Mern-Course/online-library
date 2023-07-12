@@ -59,7 +59,7 @@ const schema = new mongoose.Schema({
   },
   booksIssued: [{
     type: mongoose.Schema.ObjectId,
-    ref: "book",
+    ref: "Book",
   }],
   fine: {
     type: Number,
