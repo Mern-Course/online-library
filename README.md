@@ -33,8 +33,5 @@ The Online Library Management System is a web-based application developed to sim
 - <a href="https://github.com/YathinSreeram" target="_blank">PALURU YATHIN</a>
 - <a href="https://github.com/ArnabBanik-repo" target="_blank">ARNAB BANIK</a> 
 
-### License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 Feel free to contribute and provide feedback. Happy reading!
